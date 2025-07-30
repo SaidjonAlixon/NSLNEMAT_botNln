@@ -76,8 +76,27 @@ class SheetsHandler:
             
         except Exception as e:
             print(f"Worksheet nomlarini tekshirishda xatolik: {e}")
+    
+    def is_user_registered(self, telegram_id):
+        """Telegram ID bo'yicha foydalanuvchi ro'yxatdan o'tganligini tekshirish"""
+        try:
+            if not self.users_sheet_name:
+                print("Foydalanuvchilar worksheet topilmadi!")
+                return False
+                
+            worksheet = self.spreadsheet.worksheet(self.users_sheet_name)
+            all_values = worksheet.get_all_values()
+            
+            # E ustunda Telegram ID saqlanadi
+            for row in all_values[1:]:  # Header qatorini o'tkazib yuborish
+                if len(row) > 4 and str(row[4]) == str(telegram_id):
+                    return True
+            return False
+        except Exception as e:
+            print(f"Foydalanuvchi tekshirishda xatolik: {e}")
+            return False
         
-    def add_user(self, name, phone, business):
+    def add_user(self, name, phone, business, telegram_id=None):
         """Yangi foydalanuvchini qo'shish"""
         try:
             if not self.users_sheet_name:
@@ -87,8 +106,8 @@ class SheetsHandler:
             worksheet = self.spreadsheet.worksheet(self.users_sheet_name)
             today = datetime.now().strftime('%d.%m.%Y')
             
-            # Yangi qator qo'shish
-            row = [name, phone, business, today]
+            # Yangi qator qo'shish (A: Ism, B: Telefon, C: Biznes, D: Sana, E: Telegram ID)
+            row = [name, phone, business, today, telegram_id if telegram_id else '']
             worksheet.append_row(row)
             print(f"Foydalanuvchi muvaffaqiyatli qo'shildi: {name}")
             return True

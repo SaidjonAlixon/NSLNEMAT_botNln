@@ -30,10 +30,20 @@ class NematLaserBot:
         context.user_data['user_id'] = user.id
         context.user_data['username'] = user.username
         
-        await update.message.reply_text(
-            "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!"
-        )
-        return await self.show_main_menu(update, context)
+        # Foydalanuvchining ro'yxatdan o'tganligini tekshirish
+        if self.sheets_handler.is_user_registered(user.id):
+            await update.message.reply_text(
+                "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!"
+            )
+            return await self.show_main_menu(update, context)
+        else:
+            # Ro'yxatdan o'tish jarayonini boshlash
+            await update.message.reply_text(
+                "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!\n\n"
+                "Botdan foydalanish uchun avval ro'yxatdan o'ting.\n"
+                "Iltimos, ism va familiyangizni kiriting:"
+            )
+            return NAME
     
     async def get_name(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         """Foydalanuvchi ismini olish"""
@@ -70,7 +80,8 @@ class NematLaserBot:
         success = self.sheets_handler.add_user(
             context.user_data['name'],
             context.user_data['phone'],
-            context.user_data['business']
+            context.user_data['business'],
+            context.user_data['user_id']
         )
         
         if success:
