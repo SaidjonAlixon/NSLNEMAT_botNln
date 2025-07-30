@@ -23,7 +23,7 @@ class NematLaserBot:
         self.pdf_generator = PDFGenerator()
         self.id_storage = IDStorage()
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-        """Start komandasi"""
+        """Start komandasi - har doim asosiy menyuga qaytadi"""
         user = update.effective_user
         
         # Foydalanuvchi ma'lumotlarini saqlash
@@ -32,7 +32,9 @@ class NematLaserBot:
         
         # Foydalanuvchining ro'yxatdan o'tganligini tekshirish
         if self.sheets_handler.is_user_registered(user.id):
+            # Ro'yxatdan o'tgan foydalanuvchi - asosiy menyuga o'tish
             await update.message.reply_text(
+                "🔄 Bot yangilandi!\n\n"
                 "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!"
             )
             return await self.show_main_menu(update, context)
