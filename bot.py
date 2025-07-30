@@ -44,7 +44,7 @@ class NematLaserBot:
                 "Assalomu alaykum!\n"
                 "NE'MAT LASER SERVICE botiga xush kelibsiz!\n\n"
                 "Botdan foydalanish uchun avval ro'yxatdan o'ting.\n"
-                "Ism va familiyangizni kiriting:"
+                "Ism kiriting:"
             )
             return NAME
     
@@ -70,7 +70,7 @@ class NematLaserBot:
             context.user_data['phone'] = update.message.text
         
         await update.message.reply_text(
-            "Biznes nomingizni kiriting:",
+            "Kompaniya nomini kiriting:",
             reply_markup=ReplyKeyboardRemove()
         )
         return BUSINESS
