@@ -31,7 +31,7 @@ class NematLaserBot:
         context.user_data['username'] = user.username
         
         await update.message.reply_text(
-            "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!\n\n"
+            "Assalomu alaykum! NE'MAT LASER SERVICE botiga xush kelibsiz!\n\n"
             "Botdan foydalanish uchun avval ro'yxatdan o'tishingiz kerak.\n\n"
             "Iltimos, ism va familiyangizni kiriting:"
         )
@@ -79,7 +79,7 @@ class NematLaserBot:
             await update.message.reply_text(
                 "✅ Ro'yxatdan o'tish muvaffaqiyatli yakunlandi!\n\n"
                 "Assalomu alaykum, xush kelibsiz!\n"
-                "NEMAT LASER SERVICE botiga!"
+                "NE'MAT LASER SERVICE botiga!"
             )
         else:
             await update.message.reply_text(
@@ -109,7 +109,7 @@ class NematLaserBot:
         
         if text == "📌 Biz haqimizda":
             await update.message.reply_text(
-                "🏢 NEMAT LASER SERVICE\n\n"
+                "🏢 NE'MAT LASER SERVICE\n\n"
                 "Biz lazerli kesish va ishlab chiqarish xizmatlarini taqdim etamiz.\n\n"
                 "📞 Aloqa: +998 XX XXX XX XX\n"
                 "📍 Manzil: Toshkent shahri\n"
@@ -264,7 +264,7 @@ application.add_handler(conv_handler)
 def home():
     return jsonify({
         "status": "success",
-        "message": "NEMAT LASER SERVICE Bot ishlayapti!",
+        "message": "NE'MAT LASER SERVICE Bot ishlayapti!",
         "bot": "Telegram Bot ishlayapti"
     })
 

@@ -35,15 +35,16 @@ class NematLaserBot:
             # Ro'yxatdan o'tgan foydalanuvchi - asosiy menyuga o'tish
             await update.message.reply_text(
                 "🔄 Bot yangilandi!\n\n"
-                "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!"
+                "Assalomu alaykum! NE'MAT LASER SERVICE botiga xush kelibsiz!"
             )
             return await self.show_main_menu(update, context)
         else:
             # Ro'yxatdan o'tish jarayonini boshlash
             await update.message.reply_text(
-                "Assalomu alaykum! NEMAT LASER SERVICE botiga xush kelibsiz!\n\n"
+                "Assalomu alaykum!\n"
+                "NE'MAT LASER SERVICE botiga xush kelibsiz!\n\n"
                 "Botdan foydalanish uchun avval ro'yxatdan o'ting.\n"
-                "Iltimos, ism va familiyangizni kiriting:"
+                "Ism va familiyangizni kiriting:"
             )
             return NAME
     
@@ -56,7 +57,7 @@ class NematLaserBot:
         reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True, resize_keyboard=True)
         
         await update.message.reply_text(
-            "Iltimos, telefon raqamingizni ulashing:",
+            "Telefon raqamingizni ulashing:",
             reply_markup=reply_markup
         )
         return PHONE
@@ -69,7 +70,7 @@ class NematLaserBot:
             context.user_data['phone'] = update.message.text
         
         await update.message.reply_text(
-            "Iltimos, biznes nomingizni kiriting:",
+            "Biznes nomingizni kiriting:",
             reply_markup=ReplyKeyboardRemove()
         )
         return BUSINESS
@@ -90,7 +91,7 @@ class NematLaserBot:
             await update.message.reply_text(
                 "✅ Ro'yxatdan o'tish muvaffaqiyatli yakunlandi!\n\n"
                 "Assalomu alaykum, xush kelibsiz!\n"
-                "NEMAT LASER SERVICE botiga!"
+                "NE'MAT LASER SERVICE botiga!"
             )
         else:
             await update.message.reply_text(
@@ -135,7 +136,7 @@ class NematLaserBot:
                 return CHECK_ORDER
         elif text == "📌 Biz haqimizda":
             about_text = (
-                "\U0001F3E2 NEMAT LASER SERVICE\n\n"
+                "\U0001F3E2 NE'MAT LASER SERVICE\n\n"
                 "Biz lazerli kesish va ishlab chiqarish xizmatlarini taqdim etamiz.\n\n"
                 "\U0001F4DE Aloqa: \n"
                 "+998 99 022 50 50 \n"

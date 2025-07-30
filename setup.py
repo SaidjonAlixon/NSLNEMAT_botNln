@@ -9,8 +9,8 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="nemat-laser-bot",
     version="1.0.0",
-    author="NEMAT LASER SERVICE",
-    description="NEMAT LASER SERVICE Telegram Bot - Buyurtmalar holatini ko'rish va PDF yuborish",
+    author="NE'MAT LASER SERVICE",
+    description="NE'MAT LASER SERVICE Telegram Bot - Buyurtmalar holatini ko'rish va PDF yuborish",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),

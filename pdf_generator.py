@@ -25,7 +25,7 @@ class PDFGenerator:
             pdf.set_fill_color(30, 144, 255)  # Ko'k
             pdf.set_text_color(255, 255, 255)
             pdf.set_font("DejaVu", "B", 16)
-            pdf.cell(0, 12, "NEMAT LASER SERVICE", ln=True, align='C', fill=True)
+            pdf.cell(0, 12, "NE'MAT LASER SERVICE", ln=True, align='C', fill=True)
             pdf.set_font("DejaVu", "B", 14)
             pdf.cell(0, 10, "Тугалланган буюртмалар", ln=True, align='C', fill=True)
             pdf.ln(4)
@@ -85,7 +85,7 @@ class PDFGenerator:
             self.pdf.set_font("Arial", size=12)
             
             # Sarlavha
-            self.pdf.cell(200, 10, txt="NEMAT LASER SERVICE", ln=True, align='C')
+            self.pdf.cell(200, 10, txt="NE'MAT LASER SERVICE", ln=True, align='C')
             self.pdf.cell(200, 10, txt="Buyurtma ma'lumotlari", ln=True, align='C')
             self.pdf.ln(10)
             
@@ -152,7 +152,7 @@ class PDFGenerator:
             self.pdf.set_font("Arial", 'B', 16)
             
             # Sarlavha
-            self.pdf.cell(200, 10, txt="NEMAT LASER SERVICE", ln=True, align='C')
+            self.pdf.cell(200, 10, txt="NE'MAT LASER SERVICE", ln=True, align='C')
             self.pdf.cell(200, 10, txt="Buyurtmalar tarixi", ln=True, align='C')
             self.pdf.ln(10)
             
