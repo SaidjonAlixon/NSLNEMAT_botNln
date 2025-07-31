@@ -53,11 +53,11 @@ class NematLaserBot:
         context.user_data['name'] = update.message.text
         
         # Telefon raqamini so'rash
-        keyboard = [[KeyboardButton("📞 Telefon raqamini ulash", request_contact=True)]]
+        keyboard = [[KeyboardButton("📞 Telefon raqamini kiriting", request_contact=True)]]
         reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True, resize_keyboard=True)
         
         await update.message.reply_text(
-            "Telefon raqamingizni ulashing:",
+            "Telefon raqamingizni kiriting:",
             reply_markup=reply_markup
         )
         return PHONE
@@ -139,10 +139,10 @@ class NematLaserBot:
                 "\U0001F3E2 NE'MAT LASER SERVICE\n\n"
                 "Biz lazerli kesish va ishlab chiqarish xizmatlarini taqdim etamiz.\n\n"
                 "\U0001F4DE Aloqa: \n"
+                "+998 99 844 20 20 \n"
                 "+998 99 022 50 50 \n"
-                "+998 97 002 77 77 \n"
-                "+998 99 044 20 20 \n"
-                "+998 99 844 20 20\n\n"
+                "+998 99 044 20 20\n"
+                "+998 97 002 77 77\n\n"
                 "\U0001F4CD Manzil: г. Ташкент, район Сергели , ул. Саадий 87\n"
                 "\U0001F552 Ish vaqti: Dushanba-Shanba 9:00-18:00"
             )

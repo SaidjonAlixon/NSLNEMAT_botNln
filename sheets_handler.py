@@ -154,7 +154,7 @@ class SheetsHandler:
             return None
     
     def find_completed_orders_by_id(self, client_id):
-        """Client ID bo'yicha barcha tugallangan (status=100) buyurtmalarni topish"""
+        """Client ID bo'yicha barcha tugallangan (status=100 va K yacheykada ptichka) buyurtmalarni topish"""
         try:
             if not self.orders_sheet_name:
                 print("Buyurtmalar worksheet topilmadi!")
@@ -164,9 +164,12 @@ class SheetsHandler:
             all_values = worksheet.get_all_values()
             
             orders = []
-            # E ustun (Client ID) - 4-indeks, J ustun (Status) - 9-indeks
+            # E ustun (Client ID) - 4-indeks, J ustun (Status) - 9-indeks, K ustun (Sent Checkbox) - 10-indeks
             for i, row in enumerate(all_values[4:], start=5):  # 5-qatordan boshlanadi
-                if len(row) > 9 and row[4] == client_id and row[9] == '100':  # E ustun va J ustun
+                # Shartlar: E ustunda client_id, J ustunda 100, K ustunda TRUE yoki ✓
+                k_value = row[10] if len(row) > 10 else ''
+                if (len(row) > 10 and row[4] == client_id and row[9] == '100' and 
+                    (k_value == 'TRUE' or k_value == '✓' or k_value.upper() == 'TRUE')):
                     order = {
                         'row': i,
                         'order_number': row[0] if len(row) > 0 else '',
@@ -183,7 +186,7 @@ class SheetsHandler:
                     }
                     orders.append(order)
             
-            print(f"{client_id} uchun {len(orders)} ta tugallangan buyurtma topildi")
+            print(f"{client_id} uchun {len(orders)} ta tugallangan va K yacheykada belgilangan buyurtma topildi")
             return orders
         except Exception as e:
             print(f"Tugallangan buyurtmalarni qidirishda xatolik: {e}")
@@ -234,23 +237,30 @@ class SheetsHandler:
             all_values = worksheet.get_all_values()
             orders = []
             for i, row in enumerate(all_values[4:], start=5):  # 5-qatordan boshlanadi
-                if len(row) > 9 and row[4] == client_id and row[9] != '100':
-                    order = {
-                        'row': i,
-                        'order_number': row[0] if len(row) > 0 else '',
-                        'start_date': row[1] if len(row) > 1 else '',
-                        'project_name': row[2] if len(row) > 2 else '',
-                        'client_name': row[3] if len(row) > 3 else '',
-                        'client_id': row[4] if len(row) > 4 else '',
-                        'designer': row[5] if len(row) > 5 else '',
-                        'laser_cutting': row[6] if len(row) > 6 else '',
-                        'cutting': row[7] if len(row) > 7 else '',
-                        'sponge': row[8] if len(row) > 8 else '',
-                        'status': row[9] if len(row) > 9 else '',
-                        'sent_date': row[11] if len(row) > 11 else ''
-                    }
-                    orders.append(order)
-            print(f"{client_id} uchun {len(orders)} ta yakunlanmagan buyurtma topildi")
+                if len(row) > 4 and row[4] == client_id:  # E ustun
+                    status = row[9] if len(row) > 9 else ''
+                    k_value = row[10] if len(row) > 10 else ''
+                    
+                    # Shartlar: status != 100 yoki (status = 100 lekin K yacheykada ptichka yo'q)
+                    is_sent = (k_value == 'TRUE' or k_value == '✓' or k_value.upper() == 'TRUE')
+                    
+                    if status != '100' or (status == '100' and not is_sent):
+                        order = {
+                            'row': i,
+                            'order_number': row[0] if len(row) > 0 else '',
+                            'start_date': row[1] if len(row) > 1 else '',
+                            'project_name': row[2] if len(row) > 2 else '',
+                            'client_name': row[3] if len(row) > 3 else '',
+                            'client_id': row[4] if len(row) > 4 else '',
+                            'designer': row[5] if len(row) > 5 else '',
+                            'laser_cutting': row[6] if len(row) > 6 else '',
+                            'cutting': row[7] if len(row) > 7 else '',
+                            'sponge': row[8] if len(row) > 8 else '',
+                            'status': row[9] if len(row) > 9 else '',
+                            'sent_date': row[11] if len(row) > 11 else ''
+                        }
+                        orders.append(order)
+            print(f"{client_id} uchun {len(orders)} ta yakunlanmagan va K yacheykada belgilanmagan buyurtma topildi")
             return orders
         except Exception as e:
             print(f"Yakunlanmagan buyurtmalarni qidirishda xatolik: {e}")
